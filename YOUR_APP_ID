@@ -1,0 +1,19 @@
+<?php
+
+require_once 'vendor/autoload.php'; // Path to autoload.php from Facebook PHP SDK
+
+$fb = new \Facebook\Facebook([
+  'app_id' => 'YOUR_APP_ID',
+  'app_secret' => 'YOUR_APP_SECRET',
+  'default_graph_version' => 'v12.0',
+]);
+
+$helper = $fb->getRedirectLoginHelper();
+
+$permissions = ['email']; // Permissions to request from the user
+
+$loginUrl = $helper->getLoginUrl('https://your-redirect-url.com/fb-callback.php', $permissions);
+
+echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+
+?>
